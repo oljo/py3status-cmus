@@ -48,6 +48,7 @@ Copy cmus_status.py to py3status directory:
 Enable the module in your py3status config:
 
 .. code::
+
 	order += "cmus_status"
 
 Configuration
