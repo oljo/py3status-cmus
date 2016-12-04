@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-""" This module is used for displaying cmus status in i3bar using py3status.
-    
+""" This module is used for displaying status and controlling cmus music player in i3bar using py3status.    
 """
 
 import sys
@@ -47,7 +46,7 @@ CMUS_STATUS_MAP = {"playing" : PLAY_SYM,
 # ON_CLICK_MAP is used for mapping mouse clicks to process calls.
 # 
 # xev can be used to check the mouse button numbers.
-# 
+
 CACHE_UNTIL = 0.5 # In seconds
 ON_CLICK_MAP = {1 : [CMUS_CMD] + ["-u"], # Play/pause
                 9 : [CMUS_CMD] + ["-n"], # Next track
