@@ -11,23 +11,17 @@ py3status-cmus allows sending basic control commands to local or remote cmus by 
 
 **Examples**
 
+.. image:: doc/img/playing_progress_bar.png
 *Playing*
 
-.. image:: doc/img/playing_progress_bar.png
-
+.. image:: doc/img/paused_progress_bar.png
 *Paused*
 
-.. image:: doc/img/paused_progress_bar.png
-
+.. image:: doc/img/stopped_progress_bar.png
 *Stopped*
 
-.. image:: doc/img/stopped_progress_bar.png
-
-*Paused (no progress bar)*
-
 .. image:: doc/img/paused_no_progress_bar.png
-
-
+*Paused (no progress bar)*
 
 Requirements
 ------------
@@ -137,8 +131,8 @@ To disable progress bar set **SHOW_PROGRESS_BAR** to False.
 	CMUS_CMD  = "cmus-remote"
 	CMUS_ARGS = ["-Q"]
 
-**CMUS_ARGS** defines arguments that are forwared to cmus-remote.
-If you use different socket than default ~/.cmus/socket or you want status from remote cmus, you can specify it by using "--server" argument.
+**CMUS_ARGS** defines arguments that are forwarded to cmus-remote.
+If you use different socket than default ~/.cmus/socket or you want the status from remote cmus, you can specify the socket by using "--server" argument.
 
 e.g.
 
