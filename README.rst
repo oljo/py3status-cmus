@@ -3,9 +3,31 @@ py3status-cmus
 
 This is a module for py3status_ to control and show information related to cmus_ music player.
 
+py3status-cmus allows sending basic control commands to local or remote cmus by mouse button presses on i3 status bar.
+
 .. _py3status: https://github.com/ultrabug/py3status
 
 .. _cmus: https://cmus.github.io/
+
+**Examples**
+
+*Playing*
+
+.. image:: doc/img/playing_progress_bar.png
+
+*Paused*
+
+.. image:: doc/img/paused_progress_bar.png
+
+*Stopped*
+
+.. image:: doc/img/stopped_progress_bar.png
+
+*Paused (no progress bar)*
+
+.. image:: doc/img/paused_no_progress_bar.png
+
+
 
 Requirements
 ------------
@@ -15,7 +37,7 @@ If not, look at py3status install_ for more information.
 
 .. _install: https://github.com/ultrabug/py3status#installation
 
-Make sure that cmus-remote can be found in your PATH.
+Make sure that *cmus-remote* can be found in your PATH.
 
 .. code::
 
@@ -70,7 +92,9 @@ cmus_status.py has few variables which can be used to configure the status outpu
 	PAUSE_SYM = u"⌷⌷"
 	STOP_SYM  = u"◻"
 
-*STATUS_OUTPUT_FORMAT* defines the basic format for the output status. Variables defined between %-characters should match to "cmus-remote -Q" output with "set" and "tag" omitted.
+**STATUS_OUTPUT_FORMAT** defines the basic format for the output status.
+
+Variables defined between %-characters should match to **cmus-remote -Q** output with *set* and *tag* omitted.
 
 e.g. in following example %genre% would match to "Folk Rock".
 
@@ -101,19 +125,19 @@ e.g. in following example %genre% would match to "Folk Rock".
 	set vol_left -1
 	set vol_right -1
 
-*CMUS_NOT_RUNNING_MSG* and *NOTHING_PLAYING_MSG* are status outputs when cmus is not running or if nothing is playing in cmus.
+**CMUS_NOT_RUNNING_MSG** and **NOTHING_PLAYING_MSG** are status outputs when cmus is not running or if nothing is playing in cmus.
 
 These can be set to "" to get empty status string.
 
-To disable progress bar set *SHOW_PROGRESS_BAR* to False.
-*PROGRESS_BAR_LENGTH* defines length of the progress bar in characters.
+To disable progress bar set **SHOW_PROGRESS_BAR** to False.
+**PROGRESS_BAR_LENGTH** defines length of the progress bar in characters.
 
 .. code:: python
 
 	CMUS_CMD  = "cmus-remote"
 	CMUS_ARGS = ["-Q"]
 
-*CMUS_ARGS* defines arguments that are forwared to cmus-remote.
+**CMUS_ARGS** defines arguments that are forwared to cmus-remote.
 If you use different socket than default ~/.cmus/socket or you want status from remote cmus, you can specify it by using "--server" argument.
 
 e.g.
@@ -126,7 +150,7 @@ e.g.
 
 	CACHE_UNTIL = 0.5
 
-*CACHE_UNTIL* defines how often status is updated (in seconds).
+**CACHE_UNTIL** defines how often status is updated (in seconds).
 
 On click
 --------
@@ -141,6 +165,6 @@ These mappings can be changed by editing ON_CLICK_MAP dictionary in cmus_status.
         	        8 : [CMUS_CMD] + ["-r"]  # Previous track
                		}
 
-Xev_ can be used to find out mouse button numbers.
+xev_ can be used to find out mouse button numbers.
 
-.. _Xev: https://www.x.org/archive/X11R7.7/doc/man/man1/xev.1.xhtml
+.. _xev: https://www.x.org/archive/X11R7.7/doc/man/man1/xev.1.xhtml
