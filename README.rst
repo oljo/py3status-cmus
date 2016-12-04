@@ -118,9 +118,11 @@ If you use different socket than default ~/.cmus/socket or you want status from 
 e.g.
 
 .. code:: python
+
 	CMUS_ARGS = ["-Q", "--server", "<SOCKET or IP>", "--passwd", "<CMUSPASS>"]
 
 .. code:: python
+
 	CACHE_UNTIL = 0.5
 
 *CACHE_UNTIL* defines how often status is updated (in seconds).
