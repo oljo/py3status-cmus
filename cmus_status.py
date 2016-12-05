@@ -13,7 +13,7 @@ from subprocess import Popen, PIPE
 ###########
  
 STATUS_OUTPUT_FORMAT = "%status% %artist% - %tracknumber%. %title%"
-CMUS_NOT_RUNNING_MSG = "Cmus: not running."
+CMUS_NOT_RUNNING_MSG = ""
 NOTHING_PLAYING_MSG = "Nothing playing."
 SHOW_PROGRESS_BAR = True
 PROGRESS_BAR_STYLE = {1: u"█",
@@ -133,7 +133,7 @@ def format_status_output(input_data):
              tmp_status_output = mp_status_output.replace("%" + status_var + "%", cmus_status["sets"][status_var])
 
     if not len(cmus_status["tags"]):
-        if cmus_status["status"] == "stopped":
+        if cmus_status["status"] in ["stopped", CMUS_STATUS_MAP["stopped"]]:
             return NOTHING_PLAYING_MSG
         elif not cmus_status["status"] in ["playing", "paused"]:
             return cmus_status["status"]
