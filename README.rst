@@ -69,24 +69,30 @@ Enable the module in your py3status config:
 
 Configuration
 -------------
-cmus_status.py has few variables which can be used to configure the status output:
+Configuration should be done in py3status config file:
 
-.. code:: python
-	
-	STATUS_OUTPUT_FORMAT = "%status% %artist% - %tracknumber%. %title%"
-	CMUS_NOT_RUNNING_MSG = "Cmus: not running."
-	NOTHING_PLAYING_MSG = "Nothing playing."
-	SHOW_PROGRESS_BAR = True
-	PROGRESS_BAR_STYLE = {1: u"█",
-        	              2: u" " }
-	PROGRESS_BAR_LENGTH = 10
-	
-	# Status symbols
-	PLAY_SYM  = u"▷"
-	PAUSE_SYM = u"⌷⌷"
-	STOP_SYM  = u"◻"
+.. code::
 
-**STATUS_OUTPUT_FORMAT** defines the basic format for the output status.
+	 cmus_status {
+		output_format = "%status% %artist% - %album% - %title%"
+		show_progress_bar = false
+	        show_playtime = true
+		progress_bar_length = 10
+		on_click 1 = "exec cmus-remote -u"
+	}
+
+Parameters:
+
+* cache_timeout  
+* output_format
+* show_progress_bar 
+* progress_bar_length
+* not_running_msg 
+* nothing_playing_msg 
+* cmus_args
+* show_playtime 
+
+**output** defines the basic format for the output status.
 
 Variables defined between %-characters should match to **cmus-remote -Q** output with *set* and *tag* omitted.
 
@@ -119,44 +125,45 @@ e.g. in following example %genre% would match to "Folk Rock".
 	set vol_left -1
 	set vol_right -1
 
-**CMUS_NOT_RUNNING_MSG** and **NOTHING_PLAYING_MSG** are status outputs when cmus is not running or if nothing is playing in cmus.
+**not_running_msg** and **nothing_playing_msg** are status outputs when cmus is not running or if nothing is playing in cmus.
 
 These can be set to "" to get empty status string.
 
-To disable progress bar set **SHOW_PROGRESS_BAR** to False.
-**PROGRESS_BAR_LENGTH** defines length of the progress bar in characters.
+To disable progress bar set **show_progress_bar** to false.
+**progress_bar_length** defines length of the progress bar in characters.
 
-.. code:: python
-
-	CMUS_CMD  = "cmus-remote"
-	CMUS_ARGS = ["-Q"]
-
-**CMUS_ARGS** defines arguments that are forwarded to cmus-remote.
-If you use different socket than default ~/.cmus/socket or you want the status from remote cmus, you can specify the socket by using "--server" argument.
+**cmus_args** defines arguments that are forwarded to cmus-remote.
+If you use different socket than default ~/.cmus/socket or you want the status from remote cmus, you can specify it here by using "--server" argument.
 
 e.g.
 
-.. code:: python
+.. code:: 
 
-	CMUS_ARGS = ["-Q", "--server", "<SOCKET or IP>", "--passwd", "<CMUSPASS>"]
+	cmus_args = "--server 192.168.1.10" 
 
-.. code:: python
-
-	CACHE_UNTIL = 0.5
-
-**CACHE_UNTIL** defines how often status is updated (in seconds).
+**cache_until** defines how often status is updated (in seconds).
 
 On click
 --------
 
-Default configuration maps left mouse click to play/pause and buttons 9 and 8 (forward & backward) to next and previous song.
-These mappings can be changed by editing ON_CLICK_MAP dictionary in cmus_status.py
+Mouse buttons 1-5 can be set in py3status configuration file using on_click:
+
+.. code:: 
+
+	cmus_status {
+	        output_format = "%status% %artist% - %album% - %title%"
+	        show_progress_bar = false
+	        show_playtime = true
+		on_click 1 = "exec cmus-remote -u"
+	}
+
+If your mouse has buttons with larger numbers (e.g. 8 and 9 for page backward and forward) they can be mapped to click events in cmus_status.py:
 
 .. code:: python
-	
-	ON_CLICK_MAP = {1 : [CMUS_CMD] + ["-u"], # Play/pause
-	                9 : [CMUS_CMD] + ["-n"], # Next track
-        	        8 : [CMUS_CMD] + ["-r"]  # Previous track
+
+	ON_CLICK_MAP = {
+        	        9 : [CMUS_CMD] + ["-n"], # Next track
+                	8 : [CMUS_CMD] + ["-r"]  # Previous track
                		}
 
 xev_ can be used to find out mouse button numbers.

@@ -42,16 +42,10 @@ CMUS_STATUS_MAP = {"playing" : PLAY_SYM,
                    "paused"  : PAUSE_SYM
                   }
 
-########################
-# ON_CLICK_MAP is used for mapping mouse clicks to process calls.
-# 
-# xev can be used to check the mouse button numbers.
-
-ON_CLICK_MAP = {1 : [CMUS_CMD] + ["-u"], # Play/pause
+ON_CLICK_MAP = {
                 9 : [CMUS_CMD] + ["-n"], # Next track
                 8 : [CMUS_CMD] + ["-r"]  # Previous track
-                }
-
+               }
 
 class Py3status:
     cache_timeout = CACHE_TIMEOUT
@@ -75,14 +69,14 @@ class Py3status:
                 status_output += " " + playtime
         return {"full_text" : status_output,
                 "cached_until" : self.py3.time_in(self.cache_timeout)}
-    
+   
     def on_click(self, event):
         button = event["button"]
         if button in ON_CLICK_MAP:
             cmusProcess = Popen(ON_CLICK_MAP[button], stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             output, error = cmusProcess.communicate()
             error = error.decode()
-
+ 
     def _get_playtime(self, input_data):
         playtime_str = ""
         try:
