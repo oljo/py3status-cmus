@@ -92,7 +92,7 @@ Parameters:
 * cmus_args
 * show_playtime 
 
-**output** defines the basic format for the output status.
+**output_format** defines the basic format for the output status.
 
 Variables defined between %-characters should match to **cmus-remote -Q** output with *set* and *tag* omitted.
 
